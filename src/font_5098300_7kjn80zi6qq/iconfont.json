@@ -1,0 +1,16 @@
+{
+  "id": "5098300",
+  "name": "sztu",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "33987169",
+      "name": "进入",
+      "font_class": "jinru",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    }
+  ]
+}
