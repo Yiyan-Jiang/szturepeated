@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
     "lint:eslint": "eslint . --fix --cache",
-    "lint": "run-s lint:*"
+    "lint": "run-s lint:*",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "ant-design-vue": "^4.2.6",

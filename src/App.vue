@@ -80,41 +80,44 @@
 </style>
 
 <template>
-  <div class="navbox">
-    <headnav @updata-title="updatatop" style="z-index: 1000;"></headnav>
-  </div>
-  <div class="topnavContainer">
-    <transition name="slidedown">
-      <topnav v-if="!isshowtime"></topnav>
-    </transition>
-  </div>
-  <a-space direction="vertical" :style="{ width: '100%' }" :size="[0, 48]">
-    <a-layout>
-      <a-layout-sider
-        :style="siderStyle"
-        :width="siderWidth">  <!-- 侧边栏 -->
-        <sideleft @contract="reviseWidth" :width="siderWidth" style="z-index: 1000;"></sideleft>
-      </a-layout-sider>
+  <MobileWarning :show="showModal" @close="handleModalClose" />
+  <div v-if="!isMobile || !showModal" class="main-content">
+    <div class="navbox">
+      <headnav @updata-title="updatatop" style="z-index: 1000;"></headnav>
+    </div>
+    <div class="topnavContainer">
+      <transition name="slidedown">
+        <topnav v-if="!isshowtime"></topnav>
+      </transition>
+    </div>
+    <a-space direction="vertical" :style="{ width: '100%' }" :size="[0, 48]">
+      <a-layout>
+        <a-layout-sider
+          :style="siderStyle"
+          :width="siderWidth">  <!-- 侧边栏 -->
+          <sideleft @contract="reviseWidth" :width="siderWidth" style="z-index: 1000;"></sideleft>
+        </a-layout-sider>
 
-      <a-layout v-show="shouldShowLayout">
-        <a-layout-content :style="contentStyle">
-          <concentmap></concentmap> <!-- 轮播图 -->
-          <firstmain></firstmain>
-          <secondmain></secondmain>
-          <div class="scolltop" v-scroll-animate><thirldmain></thirldmain></div>
-          <Medianews></Medianews>
-        </a-layout-content>
-        <a-layout-footer :style="footerStyle">
-          <Footer></Footer>
-        </a-layout-footer>
+        <a-layout v-show="shouldShowLayout">
+          <a-layout-content :style="contentStyle">
+            <concentmap></concentmap> <!-- 轮播图 -->
+            <firstmain></firstmain>
+            <secondmain></secondmain>
+            <div class="scolltop" v-scroll-animate><thirldmain></thirldmain></div>
+            <Medianews></Medianews>
+          </a-layout-content>
+          <a-layout-footer :style="footerStyle">
+            <Footer></Footer>
+          </a-layout-footer>
+        </a-layout>
       </a-layout>
-    </a-layout>
-  </a-space>
+    </a-space>
+  </div>
 </template>
 
 <script setup>
-import { computed, ref,watch } from 'vue';
-
+import { computed, ref , watch , onMounted } from 'vue';
+import { useDevice } from './components/useDevice'
 import Concentmap from './components/concentmap.vue';
 import topnav from './components/topnav.vue';
 import sideleft from './components/sideleft.vue';
@@ -124,7 +127,7 @@ import Secondmain from './components/secondmain.vue';
 import Thirldmain from './components/thirldmain.vue';
 import Footer from './components/footer.vue';
 import Medianews from './components/medianews.vue';
-import SwiperA from './components/swiperA.vue';
+import MobileWarning from './components/MobileWarning.vue'
 
 const headerStyle = {
   textAlign: 'center',
@@ -196,5 +199,19 @@ watch(isshowtime, (newVal) => {
     shouldShowLayout.value = true;
   }
 });
+
+
+const { isMobile, unlockScroll } = useDevice()
+const showModal = ref(false)
+onMounted(() => {
+  if (isMobile.value) {
+    showModal.value = true
+  }
+})
+
+const handleModalClose = () => {
+  showModal.value = false
+  unlockScroll()
+}
 </script>
 
