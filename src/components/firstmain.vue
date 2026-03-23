@@ -512,7 +512,7 @@ ul{
 .upbox ,
 .scolltop{
   opacity: 0;
-  transform: translateY(100px);
+  transform: translateY(80px);
   transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .scollleft{
