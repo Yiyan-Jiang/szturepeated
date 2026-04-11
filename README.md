@@ -1,4 +1,6 @@
-# 游戏
+# SZTU 使用vue复刻官网
+
+web社团的一个入门练习，没有使用到router
 
 This template should help get you started developing with Vue 3 in Vite.
 
