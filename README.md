@@ -1,6 +1,7 @@
 # SZTU 使用vue复刻官网
 
 web社团的一个入门练习，没有使用到router
+**在线预览网址**： https://yiyan-jiang.github.io/szturepeated/
 
 This template should help get you started developing with Vue 3 in Vite.
 
